@@ -1,54 +1,25 @@
-# React + TypeScript + Vite
+# 👨‍💻 React User Gallery with Infinite Scroll & Pagination
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a React-based user gallery that fetches mock user data from [dummyjson.com](https://dummyjson.com) and displays them in a paginated, scrollable UI. It features infinite scroll within a page and auto-resets scroll position when navigating between pages.
 
-Currently, two official plugins are available:
+## 📸 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 🧲 **Infinite Scroll**: Loads more user cards dynamically as you scroll down.
+- 🔄 **Pagination Support**: Navigate between different pages of users.
+- 🚀 **Auto Scroll Reset**: Resets scroll position when you change pages.
+- 🧑‍🎨 **User Cards**: Displays user name, gender, username, etc. in a card-style layout.
 
-## Expanding the ESLint configuration
+## 📦 Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- ⚛️ React (Hooks)
+- 🔗 Axios (for API calls)
+- 💅 CSS (for layout & styling)
+- 📡 DummyJSON API
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 🧰 Getting Started
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 1. Clone the repo
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+```bash
+git clone https://github.com/your-username/react-user-infinite-scroll.git
+cd react-user-infinite-scroll
