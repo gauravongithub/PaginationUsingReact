@@ -1,15 +1,18 @@
 import { Dispatch, SetStateAction, useState } from 'react';
+import { User } from './CodeMirror';
 
 interface PaginationIndexProps {
   totalSize: number;
-  setStartPage: Dispatch<SetStateAction<number>>;
+  setStartPage: Dispatch<SetStateAction<number>>
   totalNumerOfImagesPerRow: number;
+  setVisibleItems: Dispatch<SetStateAction<User[]>>
 }
 
 const PaginationIndex = ({
   totalSize,
   setStartPage,
   totalNumerOfImagesPerRow,
+  setVisibleItems
 }: PaginationIndexProps) => {
   const [highlightedNumber, setHighlightedNumber] = useState(1);
 
@@ -41,6 +44,7 @@ const PaginationIndex = ({
   const handleIndexButtonClick = (pageIndex: number) => {
     setHighlightedNumber(pageIndex);
     setStartPage((pageIndex - 1) * totalNumerOfImagesPerRow + 1);
+    setVisibleItems([])
   };
 
   const handlePrev = () => {
@@ -49,6 +53,7 @@ const PaginationIndex = ({
       setStartPage((newVal - 1) * totalNumerOfImagesPerRow + 1);
       return newVal;
     });
+    setVisibleItems([])
   };
 
   const handleNext = () => {
@@ -57,6 +62,7 @@ const PaginationIndex = ({
       setStartPage((newVal - 1) * totalNumerOfImagesPerRow + 1);
       return newVal;
     });
+    setVisibleItems([])
   };
 
   return (

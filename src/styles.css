@@ -1,0 +1,28 @@
+.scroll-content {
+  height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  /* Remove visual box appearance */
+  border: none;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+
+  /* Optional: Nice slim scroll */
+  scrollbar-width: thin;
+  scrollbar-color: #aaa transparent;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #aaa;
+    border-radius: 10px;
+  }
+}
