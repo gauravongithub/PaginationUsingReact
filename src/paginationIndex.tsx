@@ -1,17 +1,64 @@
-import { useState } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react';
+
+interface PaginationIndexProps {
+  totalSize: number;
+  setStartPage: Dispatch<SetStateAction<number>>;
+  totalNumerOfImagesPerRow: number;
+}
 
 const PaginationIndex = ({
   totalSize,
   setStartPage,
-  totalNumerOfImagesPerRow
-}) => {
-  const [highlightedNumber, setHighlightedNumber] = useState(1)
-  const totalIndex = Array.from({ length: totalSize }, (_i, i: number) => i + 1)
+  totalNumerOfImagesPerRow,
+}: PaginationIndexProps) => {
+  const [highlightedNumber, setHighlightedNumber] = useState(1);
+
+
+  const getVisiblePages = (totalPages: number): (number | "...")[] => {
+    const pages: (number | "...")[] = []
+
+    if (totalPages <= 10) {
+      return Array.from({ length: totalPages }, (_, i) => i + 1)
+    }
+
+    // First 5 pages
+    for (let i = 1; i <= 5; i++) {
+      pages.push(i)
+    }
+
+    pages.push("...")
+
+    // Last 5 pages
+    for (let i = totalPages - 4; i <= totalPages; i++) {
+      pages.push(i)
+    }
+
+    return pages
+  }
+
+  const totalIndex = getVisiblePages(totalSize)
 
   const handleIndexButtonClick = (pageIndex: number) => {
-    setHighlightedNumber(pageIndex)
-    setStartPage((pageIndex - 1) * totalNumerOfImagesPerRow + 1)
-  }
+    setHighlightedNumber(pageIndex);
+    setStartPage((pageIndex - 1) * totalNumerOfImagesPerRow + 1);
+  };
+
+  const handlePrev = () => {
+    setHighlightedNumber((prev) => {
+      const newVal = prev - 1;
+      setStartPage((newVal - 1) * totalNumerOfImagesPerRow + 1);
+      return newVal;
+    });
+  };
+
+  const handleNext = () => {
+    setHighlightedNumber((prev) => {
+      const newVal = prev + 1;
+      setStartPage((newVal - 1) * totalNumerOfImagesPerRow + 1);
+      return newVal;
+    });
+  };
+
   return (
     <div
       style={{
@@ -19,19 +66,18 @@ const PaginationIndex = ({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: '4rem'
+        marginTop: '4rem',
       }}
     >
-      <button
-        disabled={highlightedNumber === 1}
-        onClick={() => {
-          setHighlightedNumber((prev) => prev - 1)
-          setStartPage((prev) => prev - totalNumerOfImagesPerRow)
-        }}
-      >
+      <button disabled={highlightedNumber === 1} onClick={handlePrev}>
         ⏮
       </button>
+
       {totalIndex.map((eachNumber) => (
+        eachNumber === '...'
+        ?
+        <span key={`ellipsis`} style={{ margin: '0 10px' }}>...</span>
+        :
         <button
           key={eachNumber}
           style={{
@@ -43,24 +89,19 @@ const PaginationIndex = ({
             background: eachNumber === highlightedNumber ? 'black' : 'white',
             color: eachNumber === highlightedNumber ? 'white' : 'black',
             width: '25px',
-            margin: '10px'
+            margin: '10px',
           }}
           onClick={() => handleIndexButtonClick(eachNumber)}
         >
           {eachNumber}
         </button>
       ))}
-      <button
-        onClick={() => {
-          setHighlightedNumber((prev) => prev + 1)
-          setStartPage((prev) => prev + totalNumerOfImagesPerRow)
-        }}
-        disabled={highlightedNumber === totalIndex.length}
-      >
+
+      <button disabled={highlightedNumber === totalIndex.length} onClick={handleNext}>
         ⏭
       </button>
     </div>
-  )
-}
+  );
+};
 
-export default PaginationIndex
+export default PaginationIndex;
