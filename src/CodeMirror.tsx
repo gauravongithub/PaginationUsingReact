@@ -112,6 +112,7 @@ const CodeMirror = () => {
       <PaginationIndex
         totalSize={totalNumberofPages}
         setStartPage={setStartPage}
+        startPage = {startPage}
         totalNumerOfImagesPerRow={totalNumerOfImagesPerRow}
         setVisibleItems={setVisibleItems}
       />

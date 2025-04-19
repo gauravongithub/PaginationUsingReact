@@ -5,6 +5,7 @@ interface PaginationIndexProps {
   totalSize: number;
   setStartPage: Dispatch<SetStateAction<number>>
   totalNumerOfImagesPerRow: number;
+  startPage: number;
   setVisibleItems: Dispatch<SetStateAction<User[]>>
 }
 
@@ -12,7 +13,8 @@ const PaginationIndex = ({
   totalSize,
   setStartPage,
   totalNumerOfImagesPerRow,
-  setVisibleItems
+  setVisibleItems,
+  startPage
 }: PaginationIndexProps) => {
   const [highlightedNumber, setHighlightedNumber] = useState(1);
 
@@ -42,6 +44,7 @@ const PaginationIndex = ({
   const totalIndex = getVisiblePages(totalSize)
 
   const handleIndexButtonClick = (pageIndex: number) => {
+    if(startPage === pageIndex) return
     setHighlightedNumber(pageIndex);
     setStartPage((pageIndex - 1) * totalNumerOfImagesPerRow + 1);
     setVisibleItems([])
