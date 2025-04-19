@@ -21,5 +21,5 @@ This project is a React-based user gallery that fetches mock user data from [dum
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/your-username/react-user-infinite-scroll.git
+https://github.com/gauravongithub/PaginationUsingReact.git
 cd react-user-infinite-scroll
